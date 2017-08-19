@@ -35,3 +35,6 @@ script:
     || (echo 'Idempotence test: fail' && exit 1)
 
   - ansible-lint tests/test.yml || true;
+
+notifications:
+  email: false
