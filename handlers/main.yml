@@ -1,0 +1,10 @@
+# handlers file for ssh-server
+---
+- name: restart ssh
+  service:
+    name: ssh
+    state: restarted
+
+- name: reload ufw
+  ufw:
+    state: reloaded

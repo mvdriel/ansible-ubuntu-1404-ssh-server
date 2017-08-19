@@ -1,0 +1,7 @@
+# test file for ssh-server
+---
+- hosts: localhost
+  connection: local
+  become: true
+  roles:
+    - ../../
