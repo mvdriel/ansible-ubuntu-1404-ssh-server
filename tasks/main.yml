@@ -9,7 +9,7 @@
     creates: "{{ item }}"
   register: check_host_keys
   changed_when: "'generating new host keys' in check_host_keys.stdout"
-  with_items: "{{ ssh_server_host_keys_present }}"
+  with_items: "{{ ubuntu_1404_ssh_server_host_keys_present }}"
   when: item != ''
 
 - name: check host keys configuration
@@ -17,33 +17,33 @@
     dest: /etc/ssh/sshd_config
     regexp: "^HostKey\\s{{ item }}"
     line: "HostKey {{ item}}"
-  with_items: "{{ ssh_server_host_keys_present }}"
+  with_items: "{{ ubuntu_1404_ssh_server_host_keys_present }}"
 
 - name: disable host keys configuration
   lineinfile:
     dest: /etc/ssh/sshd_config
     regexp: "^HostKey\\s{{ item }}"
     state: absent
-  with_items: "{{ ssh_server_host_keys_absent }}"
+  with_items: "{{ ubuntu_1404_ssh_server_host_keys_absent }}"
 
 - name: remove disabled (private) host keys
   file:
     dest: "{{ item }}"
     state: absent
-  with_items: "{{ ssh_server_host_keys_absent }}"
+  with_items: "{{ ubuntu_1404_ssh_server_host_keys_absent }}"
 
 - name: remove disabled (public) host keys
   file:
     dest: "{{ item }}.pub"
     state: absent
-  with_items: "{{ ssh_server_host_keys_absent }}"
+  with_items: "{{ ubuntu_1404_ssh_server_host_keys_absent }}"
 
-- name: update configuration
+- name: configure openssh
   lineinfile:
     dest: /etc/ssh/sshd_config
     regexp: "^{{ item.key }}\\s"
     line: "{{ item.key }} {{ item.value}}"
-  with_items: "{{ ssh_server_configuration }}"
+  with_items: "{{ ubuntu_1404_ssh_server_configuration }}"
 
 - name: start and enable service
   service:
@@ -51,7 +51,7 @@
     state: started
     enabled: true
 
-- name: open firewall
+- name: configure firewall
   ufw:
     rule: allow
     to_port: 22

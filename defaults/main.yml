@@ -1,14 +1,14 @@
-# defaults file for ssh-server
+# defaults file for ubuntu-1404-ssh-server
 ---
-ssh_server_host_keys_present:
+ubuntu_1404_ssh_server_host_keys_present:
   - /etc/ssh/ssh_host_ed25519_key
   - /etc/ssh/ssh_host_rsa_key
 
-ssh_server_host_keys_absent:
+ubuntu_1404_ssh_server_host_keys_absent:
   - /etc/ssh/ssh_host_ecdsa_key
   - /etc/ssh/ssh_host_dsa_key
 
-ssh_server_configuration:
+ubuntu_1404_ssh_server_configuration:
   - key: 'KexAlgorithms'
     value: 'curve25519-sha256@libssh.org,diffie-hellman-group-exchange-sha256'
   - key: 'Ciphers'

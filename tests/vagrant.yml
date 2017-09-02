@@ -1,4 +1,4 @@
-# test file for ssh-server
+# test file for ubuntu-1404-ssh-server
 ---
 - hosts: all
   remote_user: vagrant
