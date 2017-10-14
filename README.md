@@ -2,4 +2,4 @@
 
 [![Build Status](https://travis-ci.org/mvdriel/ansible-ubuntu-1404-ssh-server.svg?branch=master)](https://travis-ci.org/mvdriel/ansible-ubuntu-1404-ssh-server)
 
-Set up an OpenSSH server in Ubuntu 14.04.
+Set up an OpenSSH server on Ubuntu 14.04.
