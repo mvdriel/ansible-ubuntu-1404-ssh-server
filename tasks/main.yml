@@ -41,7 +41,7 @@
 - name: configure openssh
   lineinfile:
     dest: /etc/ssh/sshd_config
-    regexp: "^{{ item.key }}\\s"
+    regexp: "^(#?){{ item.key }}\\s"
     line: "{{ item.key }} {{ item.value}}"
   with_items: "{{ ubuntu_1404_ssh_server_configuration }}"
 
