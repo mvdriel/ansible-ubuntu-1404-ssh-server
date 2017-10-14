@@ -17,14 +17,18 @@
     dest: /etc/ssh/sshd_config
     regexp: "^HostKey\\s{{ item }}"
     line: "HostKey {{ item}}"
+    validate: 'sshd -T -f %s'
   with_items: "{{ ubuntu_1404_ssh_server_host_keys_present }}"
+  notify: restart ssh
 
 - name: disable host keys configuration
   lineinfile:
     dest: /etc/ssh/sshd_config
     regexp: "^HostKey\\s{{ item }}"
     state: absent
+    validate: 'sshd -T -f %s'
   with_items: "{{ ubuntu_1404_ssh_server_host_keys_absent }}"
+  notify: restart ssh
 
 - name: remove disabled (private) host keys
   file:
@@ -43,7 +47,9 @@
     dest: /etc/ssh/sshd_config
     regexp: "^(#?){{ item.key }}\\s"
     line: "{{ item.key }} {{ item.value}}"
+    validate: 'sshd -T -f %s'
   with_items: "{{ ubuntu_1404_ssh_server_configuration }}"
+  notify: restart ssh
 
 - name: start and enable service
   service:
